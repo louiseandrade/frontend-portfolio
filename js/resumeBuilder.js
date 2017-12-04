@@ -70,6 +70,13 @@ bio.display = function () {
         }
     }
 
+    for (i = 0; i < this.contacts.length; i++) {
+        for (prop in this.contacts[i]) {
+            formattedContactGeneric = HTMLcontactGeneric.replace("%data%", this.contacts[i][prop]).replace("%contact%", prop);
+            $("#footerContacts").append(formattedContactGeneric);
+        }
+    }
+
     var formattedBiopic = HTMLbioPic.replace("%data%", this.biopic);
     $("#header").append(formattedBiopic);
 
@@ -170,3 +177,4 @@ bio.display();
 jobs.display();
 projects.display();
 education.display();
+$("#mapDiv").append(googleMap);
