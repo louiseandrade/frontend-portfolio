@@ -9,47 +9,46 @@ This is empty on purpose! Your code to build the resume will go here.
 
 var bio = {
     "name": "Louise Cordier",
-    "role": "Programmer",
+    "role": "Social media, design and future programmer",
     "contacts": [{
-        "mobile": "+55718285838",
+        "mobile": "+5571982212424",
         "email": "mandeumemailparacordier@gmail.com",
         "github": "louisecordier",
         "location": "São Paulo"
     }],
     "welcomeMessage": "Hello, it's me.",
     "skills": ['html', 'javascript', 'css', 'photoshop'],
-    "biopic": 'images/fry.jpg'
+    "biopic": 'images/louisecordier.jpg'
 };
 
 var education = {
     "schools": [{
-        "name": "",
-        "location": "",
-        "degree": "",
+        "name": "Feevale",
+        "location": "Rio Grande do Sul - BR",
+        "degree": "Ensino médio",
         "majors": [""],
-        "dates": "9999-22-22"
+        "dates": "2013-12-17"
     }],
     "onlineCourses": [{
-        "title": "",
-        "school": "",
-        "dates": "9999-99-99",
-        "url": ""
+        "title": "Udacity",
+        "school": "Udacity",
+        "dates": "2017-01-00",
+        "url": "udacity.com"
     }]
 };
 
 var jobs = [{
-    "employer": "",
-    "title": "",
-    "location": "",
-    "dates": 'in progress|9999-99-99',
-    "description": ""
+    "employer": "Markat",
+    "title": "Cofounder",
+    "location": "São Paulo",
+    "dates": 'in progress',
+    "description": "Markat is a digital agency that works with Inbound Marketing, SEO, Social Networks and Chatbot. We want small and medium-sized companies to enter the online market in the best way with an affordable price."
 }];
 
-var projects = [
-    {
-        "title": "",
-        "dates": "9999-99-99",
-        "description": "",
+var projects = [{
+        "title": "Mais Café",
+        "dates": "2016",
+        "description": "The Mais Café is a page that is intended to promote known writers, as well as independent authors.",
         "images": [""]
     }];
 
@@ -66,7 +65,6 @@ bio.display = function () {
 
     for (var i = 0; i < this.contacts.length; i++) {
         for (var prop in this.contacts[i]) {
-            //this.contacts[i][prop]
             var formattedContactGeneric = HTMLcontactGeneric.replace("%data%", this.contacts[i][prop]).replace("%contact%", prop);
             $("#topContacts").append(formattedContactGeneric);
         }
@@ -80,16 +78,95 @@ bio.display = function () {
 
     $("#header").append(HTMLskillsStart);
 
-    for(i = 0; i<this.skills.length; i++) {
+    for (i = 0; i < this.skills.length; i++) {
         var formattedSkill = HTMLskills.replace("%data%", this.skills[i]);
         $("#skills").append(formattedSkill);
 
     }
+};
+
+jobs.display = function () {
+    $("#workExperience").append(HTMLworkStart);
 
 
+    for (var i = 0; i < this.length; i++) {
+        var formattedEmployer = HTMLworkEmployer.replace("%data%", jobs[i].employer);
+
+        var formattedWorkTitle = HTMLworkTitle.replace("%data%", jobs[i].title);
+        $(".work-entry:last-child").append(formattedEmployer + formattedWorkTitle);
+
+        var formattedWorkDates = HTMLworkDates.replace("%data%", jobs[i].dates);
+        $(".work-entry:last-child").append(formattedWorkDates);
+
+        var formattedWorkLocation = HTMLworkLocation.replace("%data%", jobs[i].location);
+        $(".work-entry:last-child").append(formattedWorkLocation);
+
+        var formattedWorkDescription = HTMLworkDescription.replace("%data%", jobs[i].description);
+        $(".work-entry:last-child").append(formattedWorkDescription);
+
+    }
+};
+
+projects.display = function () {
+    $("#projects").append(HTMLprojectStart);
 
 
+    for (var i = 0; i < this.length; i++) {
+        var formattedTitle = HTMLprojectTitle.replace("%data%", projects[i].title);
+        $(".project-entry:last-child").append(formattedTitle);
 
+        var formattedProjectDates = HTMLprojectDates.replace("%data%", projects[i].dates);
+        $(".project-entry:last-child").append(formattedProjectDates);
+
+        var formattedProjectDescription = HTMLprojectDescription.replace("%data%", projects[i].description);
+        $(".project-entry:last-child").append(formattedProjectDescription);
+
+        var formattedProjectImage = HTMLprojectImage.replace("%data%", projects[i].image);
+        $(".project-entry:last-child").append(formattedProjectImage);
+
+    }
+};
+
+education.display = function () {
+    var schools = education.schools;
+    for (var i = 0; i < schools.length; i++) {
+        $("#education").append(HTMLschoolStart);
+
+        var formattedSchoolName= HTMLschoolName.replace("%data%", schools[i].name);
+
+        var formattedSchoolDegree = HTMLschoolDegree.replace("%data%", schools[i].degree);
+        $(".education-entry:last-child").append(formattedSchoolName + formattedSchoolDegree);
+
+        var formattedSchoolDates = HTMLschoolDates.replace("%data%", schools[i].dates);
+        $(".education-entry:last-child").append(formattedSchoolDates);
+
+        var formattedSchoolLocation = HTMLschoolLocation.replace("%data%", schools[i].location);
+        $(".education-entry:last-child").append(formattedSchoolLocation);
+
+        var formattedSchoolMajor = HTMLschoolMajor.replace("%data%", schools[i].image);
+        $(".education-entry:last-child").append(formattedSchoolMajor);
+
+    }
+    var courses = education.onlineCourses;
+    $("#education").append(HTMLonlineClasses);
+    for (i = 0; i < courses.length; i++) {
+        $("#education").append(HTMLschoolStart);
+
+        var formattedOnlineTitle = HTMLonlineTitle.replace("%data%", courses[i].title);
+
+        var formattedOnlineSchool = HTMLonlineSchool.replace("%data%", courses[i].school);
+        $(".education-entry:last-child").append(formattedOnlineTitle + formattedOnlineSchool);
+
+        var formattedOnlineDates = HTMLonlineDates.replace("%data%", courses[i].dates);
+        $(".education-entry:last-child").append(formattedOnlineDates);
+
+        var formattedOnlineUrl = HTMLonlineURL.replace("%data%", courses[i].url);
+        $(".education-entry:last-child").append(formattedOnlineUrl);
+
+    }
 };
 
 bio.display();
+jobs.display();
+projects.display();
+education.display();
