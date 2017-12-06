@@ -37,20 +37,26 @@ var education = {
     }]
 };
 
-var jobs = [{
-    "employer": "Markat",
-    "title": "Cofounder",
-    "location": "São Paulo",
-    "dates": 'in progress',
-    "description": "Markat is a digital agency that works with Inbound Marketing, SEO, Social Networks and Chatbot. We want small and medium-sized companies to enter the online market in the best way with an affordable price."
-}];
+var work = {
+    "jobs":[{
+        "employer": "Markat",
+        "title": "Cofounder",
+        "location": "São Paulo",
+        "dates": 'in progress',
+        "description": "Markat is a digital agency that works with Inbound Marketing, SEO, Social Networks and Chatbot. We want small and medium-sized companies to enter the online market in the best way with an affordable price."
+    }]
+};
 
-var projects = [{
-        "title": "Mais Café",
-        "dates": "2016",
-        "description": "The Mais Café is a page that is intended to promote known writers, as well as independent authors.",
-        "images": [""]
-    }];
+var projects = {
+    "projects": [
+        {
+            "title": "Mais Café",
+            "dates": "2016",
+            "description": "The Mais Café is a page that is intended to promote known writers, as well as independent authors.",
+            "images": [""]
+        }
+    ]
+};
 
 /*
 Inserting dynamically
@@ -92,11 +98,12 @@ bio.display = function () {
     }
 };
 
-jobs.display = function () {
+work.display = function () {
     $("#workExperience").append(HTMLworkStart);
 
 
-    for (var i = 0; i < this.length; i++) {
+    var jobs = this.jobs;
+    for (var i = 0; i < jobs.length; i++) {
         var formattedEmployer = HTMLworkEmployer.replace("%data%", jobs[i].employer);
 
         var formattedWorkTitle = HTMLworkTitle.replace("%data%", jobs[i].title);
@@ -118,7 +125,8 @@ projects.display = function () {
     $("#projects").append(HTMLprojectStart);
 
 
-    for (var i = 0; i < this.length; i++) {
+    var projects = this.projects;
+    for (var i = 0; i < projects.length; i++) {
         var formattedTitle = HTMLprojectTitle.replace("%data%", projects[i].title);
         $(".project-entry:last-child").append(formattedTitle);
 
@@ -174,7 +182,7 @@ education.display = function () {
 };
 
 bio.display();
-jobs.display();
+work.display();
 projects.display();
 education.display();
 $("#mapDiv").append(googleMap);
